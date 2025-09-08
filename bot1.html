@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KGR College of Engineering & Technology - Excellence in Education</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --primary-blue: #1e3a8a;
+            --secondary-blue: #3b82f6;
+            --light-blue: #dbeafe;
+            --white: #ffffff;
+            --gray: #6b7280;
+            --dark-gray: #374151;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--dark-gray);
+            background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+            min-height: 100vh;
+        }
+
+        /* Header Styles */
+        header {
+            background: var(--white);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            animation: slideDown 0.5s ease-out;
+        }
+
+        @keyframes slideDown { from { transform: translateY(-100%); } to { transform: translateY(0); } }
+
+        .header-top { background: var(--primary-blue); color: var(--white); padding: 8px 0; font-size: 14px; }
+
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+
+        .header-info { display: flex; justify-content: space-between; align-items: center; }
+
+        .social-links a { color: var(--white); margin-left: 15px; text-decoration: none; transition: opacity 0.3s; }
+        .social-links a:hover { opacity: 0.8; }
+
+        nav { background: var(--white); padding: 15px 0; }
+
+        .nav-container { display: flex; justify-content: space-between; align-items: center; }
+
+        .logo { font-size: 24px; font-weight: bold; color: var(--primary-blue); text-decoration: none; display: flex; align-items: center; }
+        .logo::before { content: "🎓"; margin-right: 10px; font-size: 30px; }
+
+        .nav-menu { display: flex; list-style: none; gap: 30px; }
+
+        .nav-menu a {
+            color: var(--dark-gray);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s;
+            padding: 5px 10px;
+            border-radius: 5px;
+            position: relative;
+        }
+        .nav-menu a:hover, .nav-menu a.active { color: var(--secondary-blue); background: var(--light-blue); }
+        .nav-menu a::after {
+            content: '';
+            position: absolute; bottom: -2px; left: 50%;
+            width: 0; height: 2px; background: var(--secondary-blue);
+            transition: all 0.3s; transform: translateX(-50%);
+        }
+        .nav-menu a:hover::after { width: 80%; }
+
+        /* Hero Section */
+        .hero {
+            margin-top: 120px;
+            position: relative;
+            height: 500px;
+            background: linear-gradient(135deg, var(--primary-blue) 0%, var(--secondary-blue) 100%);
+            display: flex;
+            align-items: center;
+            overflow: hidden;
+        }
+        .hero::before {
+            content: '';
+            position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 500"><rect fill="%23ffffff" opacity="0.1" x="50" y="50" width="200" height="150"/><rect fill="%23ffffff" opacity="0.05" x="300" y="100" width="150" height="200"/><rect fill="%23ffffff" opacity="0.08" x="500" y="200" width="250" height="180"/><rect fill="%23ffffff" opacity="0.06" x="800" y="80" width="180" height="220"/><rect fill="%23ffffff" opacity="0.04" x="1000" y="150" width="150" height="150"/></svg>') no-repeat center;
+            background-size: cover; opacity: 0.3;
+        }
+        .hero-content { position: relative; color: var(--white); animation: fadeInUp 1s ease-out; }
+
+        @keyframes fadeInUp { from { opacity:0; transform: translateY(30px);} to { opacity:1; transform: translateY(0);} }
+
+        .hero h1 { font-size: 48px; margin-bottom: 20px; text-shadow: 2px 2px 4px rgba(0,0,0,0.2); }
+        .hero p { font-size: 20px; margin-bottom: 30px; opacity: 0.95; }
+
+        .btn-primary {
+            display: inline-block; padding: 12px 30px; background: var(--white); color: var(--primary-blue);
+            text-decoration: none; border-radius: 50px; font-weight: bold; transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+        .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0,0,0,0.3); }
+
+        /* Content Sections */
+        .content-section { padding: 80px 0; animation: fadeIn 1s ease-out; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+        .section-title {
+            text-align: center; font-size: 36px; color: var(--primary-blue);
+            margin-bottom: 50px; position: relative;
+        }
+        .section-title::after {
+            content: ''; position: absolute; bottom: -10px; left: 50%;
+            transform: translateX(-50%); width: 80px; height: 3px; background: var(--secondary-blue);
+        }
+
+        .hidden { display: none; }
+
+        /* About Section */
+        .about-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; margin-top: 40px; }
+        .about-card {
+            background: var(--white); padding: 30px; border-radius: 10px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1); transition: transform 0.3s;
+        }
+        .about-card:hover { transform: translateY(-5px); }
+        .about-card h3 { color: var(--primary-blue); margin-bottom: 15px; font-size: 24px; }
+
+        /* Courses Section */
+        .courses-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 25px; }
+        .course-card { background: var(--white); border-radius: 10px; overflow: hidden; box-shadow: 0 5px 15px rgba(0,0,0,0.1); transition: all 0.3s; }
+        .course-card:hover { transform: scale(1.05); box-shadow: 0 10px 30px rgba(0,0,0,0.15); }
+        .course-header { background: linear-gradient(135deg, var(--primary-blue), var(--secondary-blue)); color: var(--white); padding: 20px; text-align: center; }
+        .course-body { padding: 20px; }
+        .course-body ul { list-style: none; padding-left: 0; }
+        .course-body li { padding: 5px 0; color: var(--gray); }
+        .course-body li::before { content: "→ "; color: var(--secondary-blue); font-weight: bold; }
+
+        /* Faculty Section */
+        .faculty-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 30px; }
+        .faculty-card { background: var(--white); border-radius: 10px; padding: 20px; text-align: center; box-shadow: 0 5px 15px rgba(0,0,0,0.1); transition: all 0.3s; }
+        .faculty-card:hover { transform: translateY(-5px); box-shadow: 0 10px 25px rgba(0,0,0,0.15); }
+        .faculty-avatar {
+            width: 100px; height: 100px; background: linear-gradient(135deg, var(--secondary-blue), var(--primary-blue));
+            border-radius: 50%; margin: 0 auto 15px; display: flex; align-items: center; justify-content: center; font-size: 40px; color: var(--white);
+        }
+
+        /* Admissions Section */
+        .admission-info { background: var(--white); border-radius: 10px; padding: 40px; box-shadow: 0 5px 20px rgba(0,0,0,0.1); }
+        .admission-steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 30px; margin-top: 30px; }
+        .step { text-align: center; }
+        .step-number {
+            width: 60px; height: 60px; background: var(--secondary-blue); color: var(--white); border-radius: 50%;
+            display: flex; align-items: center; justify-content: center; font-size: 24px; font-weight: bold; margin: 0 auto 15px;
+        }
+
+        /* Events Section */
+        .events-list { background: var(--white); border-radius: 10px; padding: 30px; box-shadow: 0 5px 20px rgba(0,0,0,0.1); }
+        .event-item {
+            padding: 20px; border-left: 4px solid var(--secondary-blue); margin-bottom: 20px; background: var(--light-blue);
+            border-radius: 5px; transition: all 0.3s;
+        }
+        .event-item:hover { transform: translateX(10px); box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
+        .event-date { color: var(--secondary-blue); font-weight: bold; margin-bottom: 5px; }
+
+        /* Contact Section */
+        .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
+        .contact-info { background: var(--white); padding: 30px; border-radius: 10px; box-shadow: 0 5px 20px rgba(0,0,0,0.1); }
+        .contact-item { margin-bottom: 20px; display: flex; align-items: center; }
+        .contact-item::before { content: "📍"; margin-right: 10px; font-size: 20px; }
+        .contact-item.email::before { content: "✉️"; }
+        .contact-item.phone::before { content: "📞"; }
+        .contact-form { background: var(--white); padding: 30px; border-radius: 10px; box-shadow: 0 5px 20px rgba(0,0,0,0.1); }
+        .form-group { margin-bottom: 20px; }
+        .form-group label { display: block; margin-bottom: 5px; color: var(--primary-blue); font-weight: 500; }
+        .form-group input, .form-group textarea { width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 5px; transition: border-color 0.3s; }
+        .form-group input:focus, .form-group textarea:focus { outline: none; border-color: var(--secondary-blue); }
+        .btn-submit {
+            background: var(--primary-blue); color: var(--white); padding: 12px 30px; border: none; border-radius: 5px;
+            cursor: pointer; font-size: 16px; font-weight: bold; transition: all 0.3s;
+        }
+        .btn-submit:hover { background: var(--secondary-blue); transform: translateY(-2px); }
+
+        /* Footer */
+        footer { background: var(--primary-blue); color: var(--white); text-align: center; padding: 30px 0; margin-top: 50px; }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-menu { flex-direction: column; gap: 10px; }
+            .hero h1 { font-size: 32px; }
+            .contact-grid { grid-template-columns: 1fr; }
+            .header-info { flex-direction: column; gap: 10px; }
+        }
+
+        /* Floating animation for cards */
+        @keyframes float { 0% { transform: translateY(0px);} 50% { transform: translateY(-10px);} 100% { transform: translateY(0px);} }
+        .floating { animation: float 3s ease-in-out infinite; }
+    </style>
+
+    <!-- ✨ AUTO-SCALE OVERRIDES (added) -->
+    <style>
+      :root { --header-h: 120px; }                 /* updated dynamically via JS */
+      body { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
+
+      /* Make hero adapt to any screen and respect fixed header */
+      .hero { margin-top: var(--header-h) !important; min-height: 55vh; height: auto !important; scroll-margin-top: var(--header-h); }
+
+      /* Fluid typography */
+      .hero h1 { font-size: clamp(28px, 6vw, 48px); }
+      .hero p  { font-size: clamp(16px, 3.5vw, 20px); }
+      .section-title { font-size: clamp(22px, 5vw, 36px); }
+
+      /* Fluid spacing for sections */
+      .content-section { padding: clamp(48px, 8vw, 80px) 0; scroll-margin-top: calc(var(--header-h) + 10px); }
+
+      /* Nav: allow wrapping on small screens */
+      .nav-menu { flex-wrap: wrap; gap: 12px; }
+
+      /* Responsive grids */
+      .about-grid      { grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: clamp(16px, 3vw, 30px); padding: 0 10px; }
+      .courses-grid    { grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: clamp(14px, 2.5vw, 25px); padding: 0 10px; }
+      .faculty-grid    { grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: clamp(14px, 2.5vw, 30px); padding: 0 10px; }
+      .admission-steps { grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: clamp(14px, 2.5vw, 30px); }
+      .contact-grid    { grid-template-columns: 1fr 1fr; gap: clamp(16px, 3vw, 40px); padding: 0 10px; }
+
+      /* Collapse contact columns on narrow screens */
+      @media (max-width: 768px) { .contact-grid { grid-template-columns: 1fr; } }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="header-top">
+            <div class="container">
+                <div class="header-info">
+                    <span>📧 info@kgcet.edu.in | 📞 +91-40-1234567</span>
+                    <div class="social-links">
+                        <a href="#">📘 Facebook</a>
+                        <a href="#">🐦 Twitter</a>
+                        <a href="#">📷 Instagram</a>
+                        <a href="#">💼 LinkedIn</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <nav>
+            <div class="container">
+                <div class="nav-container">
+                    <a href="#" class="logo">KGCET</a>
+                    <ul class="nav-menu">
+                        <li><a href="#home" class="nav-link active">Home</a></li>
+                        <li><a href="#about" class="nav-link">About</a></li>
+                        <li><a href="#courses" class="nav-link">Courses</a></li>
+                        <li><a href="#faculty" class="nav-link">Faculty</a></li>
+                        <li><a href="#admissions" class="nav-link">Admissions</a></li>
+                        <li><a href="#events" class="nav-link">Events</a></li>
+                        <li><a href="#contact" class="nav-link">Contact</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>KGR College of Engineering & Technology</h1>
+                <p>Shaping Tomorrow's Engineers in Hyderabad, Telangana</p>
+                <a href="#admissions" class="btn-primary">Apply Now</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="content-section hidden">
+        <div class="container">
+            <h2 class="section-title">About KGRCET</h2>
+            <div class="about-grid">
+                <div class="about-card floating">
+                    <h3>Our Vision</h3>
+                    <p>To be a premier institution of engineering education, fostering innovation and excellence in technology while nurturing responsible global citizens.</p>
+                </div>
+                <div class="about-card floating" style="animation-delay: 0.5s;">
+                    <h3>Our Mission</h3>
+                    <p>Providing quality technical education through innovative teaching methods, cutting-edge research, and industry collaboration to produce competent engineers.</p>
+                </div>
+                <div class="about-card floating" style="animation-delay: 1s;">
+                    <h3>Our Values</h3>
+                    <p>Excellence, Integrity, Innovation, Social Responsibility, and Continuous Learning form the foundation of our educational philosophy.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Courses Section -->
+    <section id="courses" class="content-section hidden">
+        <div class="container">
+            <h2 class="section-title">Our Courses</h2>
+            <div class="courses-grid">
+                <div class="course-card">
+                    <div class="course-header"><h3>Computer Science</h3></div>
+                    <div class="course-body">
+                        <ul>
+                            <li>Artificial Intelligence</li>
+                            <li>Data Science</li>
+                            <li>Cyber Security</li>
+                            <li>Software Engineering</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="course-card">
+                    <div class="course-header"><h3>Electronics & Communication</h3></div>
+                    <div class="course-body">
+                        <ul>
+                            <li>VLSI Design</li>
+                            <li>Embedded Systems</li>
+                            <li>Signal Processing</li>
+                            <li>IoT Technologies</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="course-card">
+                    <div class="course-header"><h3>Mechanical Engineering</h3></div>
+                    <div class="course-body">
+                        <ul>
+                            <li>Robotics</li>
+                            <li>Thermal Engineering</li>
+                            <li>Manufacturing</li>
+                            <li>Design Engineering</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="course-card">
+                    <div class="course-header"><h3>Civil Engineering</h3></div>
+                    <div class="course-body">
+                        <ul>
+                            <li>Structural Engineering</li>
+                            <li>Environmental Engineering</li>
+                            <li>Transportation</li>
+                            <li>Construction Management</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Faculty Section -->
+    <section id="faculty" class="content-section hidden">
+        <div class="container">
+            <h2 class="section-title">Our Faculty</h2>
+            <div class="faculty-grid">
+                <div class="faculty-card">
+                    <div class="faculty-avatar">👨‍🏫</div>
+                    <h3>Dr. Rajesh Kumar</h3>
+                    <p>Principal</p>
+                    <small>Ph.D. in Computer Science</small>
+                </div>
+                <div class="faculty-card">
+                    <div class="faculty-avatar">👩‍🏫</div>
+                    <h3>Dr. Priya Sharma</h3>
+                    <p>HOD - Electronics</p>
+                    <small>Ph.D. in VLSI Design</small>
+                </div>
+                <div class="faculty-card">
+                    <div class="faculty-avatar">👨‍🏫</div>
+                    <h3>Prof. Arun Reddy</h3>
+                    <p>HOD - Mechanical</p>
+                    <small>M.Tech in Robotics</small>
+                </div>
+                <div class="faculty-card">
+                    <div class="faculty-avatar">👩‍🏫</div>
+                    <h3>Dr. Sneha Patel</h3>
+                    <p>HOD - Civil</p>
+                    <small>Ph.D. in Structural Eng.</small>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Admissions Section -->
+    <section id="admissions" class="content-section hidden">
+        <div class="container">
+            <h2 class="section-title">Admissions</h2>
+            <div class="admission-info">
+                <h3>Join KGCET - Your Gateway to Engineering Excellence</h3>
+                <p>We offer admissions through various entrance examinations including JEE Main, TS EAMCET, and Management Quota.</p>
+                <div class="admission-steps">
+                    <div class="step">
+                        <div class="step-number">1</div>
+                        <h4>Apply Online</h4>
+                        <p>Fill the application form</p>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">2</div>
+                        <h4>Document Verification</h4>
+                        <p>Submit required documents</p>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">3</div>
+                        <h4>Counseling</h4>
+                        <p>Attend counseling session</p>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">4</div>
+                        <h4>Enrollment</h4>
+                        <p>Complete fee payment</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Events Section -->
+    <section id="events" class="content-section hidden">
+        <div class="container">
+            <h2 class="section-title">Upcoming Events</h2>
+            <div class="events-list">
+                <div class="event-item">
+                    <div class="event-date">September 15, 2025</div>
+                    <h3>Tech Fest 2025</h3>
+                    <p>Annual technical festival featuring competitions, workshops, and guest lectures</p>
+                </div>
+                <div class="event-item">
+                    <div class="event-date">September 20, 2025</div>
+                    <h3>Industry Connect Summit</h3>
+                    <p>Networking event with leading tech companies and placement opportunities</p>
+                </div>
+                <div class="event-item">
+                    <div class="event-date">October 5, 2025</div>
+                    <h3>Research Symposium</h3>
+                    <p>Showcase of innovative student research projects and papers</p>
+                </div>
+                <div class="event-item">
+                    <div class="event-date">October 12, 2025</div>
+                    <h3>Cultural Festival</h3>
+                    <p>Celebrating diversity through music, dance, and arts</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="content-section hidden">
+        <div class="container">
+            <h2 class="section-title">Contact Us</h2>
+            <div class="contact-grid">
+                <div class="contact-info">
+                    <h3>Get in Touch</h3>
+                    <div class="contact-item">
+                        KGR College of Engineering & Technology<br>
+                        Plot No. 123, Knowledge City<br>
+                        Hyderabad, Telangana 500001
+                    </div>
+                    <div class="contact-item email">info@kgcet.edu.in</div>
+                    <div class="contact-item phone">
+                        +91-40-12345678<br>
+                        +91-40-87654321
+                    </div>
+                </div>
+                <div class="contact-form">
+                    <h3>Send us a Message</h3>
+                    <form>
+                        <div class="form-group">
+                            <label>Name</label>
+                            <input type="text" placeholder="Your Name">
+                        </div>
+                        <div class="form-group">
+                            <label>Email</label>
+                            <input type="email" placeholder="your.email@example.com">
+                        </div>
+                        <div class="form-group">
+                            <label>Message</label>
+                            <textarea rows="4" placeholder="Your message here..."></textarea>
+                        </div>
+                        <button type="submit" class="btn-submit">Send Message</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 KGR College of Engineering & Technology. All Rights Reserved.</p>
+            <p>Empowering Engineers, Building Future</p>
+        </div>
+    </footer>
+
+    <!-- Chatbot Container -->
+    <div class="chatbot-container" title="Chat with us!">
+        <!-- Space reserved for chatbot integration -->
+    </div>
+
+    <!-- ✨ AUTO-SCALE HELPER: sets --header-h to your real header height -->
+    <script>
+      function setHeaderHeightVar() {
+        var header = document.querySelector('header');
+        var h = header ? header.offsetHeight : 120;
+        document.documentElement.style.setProperty('--header-h', h + 'px');
+      }
+      window.addEventListener('load', setHeaderHeightVar);
+      window.addEventListener('resize', setHeaderHeightVar);
+    </script>
+
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+
+                document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
+                this.classList.add('active');
+
+                document.querySelectorAll('.content-section').forEach(section => section.classList.add('hidden'));
+
+                const targetId = this.getAttribute('href').substring(1);
+                if (targetId !== 'home') {
+                    const targetSection = document.getElementById(targetId);
+                    if (targetSection) {
+                        targetSection.classList.remove('hidden');
+                        targetSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }
+                } else {
+                    document.getElementById('home').scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        });
+
+        // Chatbot placeholder functionality
+        document.querySelector('.chatbot-container').addEventListener('click', function() {
+            alert('Chatbot integration space - Connect your chatbot service here!');
+        });
+
+        // Form submission handler
+        document.querySelector('.contact-form form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Thank you for your message! We will get back to you soon.');
+            this.reset();
+        });
+
+        // Performance-friendly parallax (throttled)
+        (function(){
+          const parallax = document.querySelector('.hero');
+          if (!parallax) return;
+          let y = 0, ticking = false;
+          window.addEventListener('scroll', () => {
+            y = window.pageYOffset || document.documentElement.scrollTop || 0;
+            if (!ticking) {
+              requestAnimationFrame(() => {
+                parallax.style.transform = 'translateY(' + (y * 0.5) + 'px)';
+                ticking = false;
+              });
+              ticking = true;
+            }
+          }, { passive: true });
+        })();
+
+        // Dynamic year in footer
+        const currentYear = new Date().getFullYear();
+        document.querySelector('footer p').innerHTML = `&copy; ${currentYear} KGR College of Engineering & Technology. All Rights Reserved.`;
+    </script>
+
+    <script type="text/javascript">
+      (function(d, t) {
+          var v = d.createElement(t), s = d.getElementsByTagName(t)[0];
+          v.onload = function() {
+            window.voiceflow.chat.load({
+              verify: { projectID: '68bc5059d1715034556f2e81' },
+              url: 'https://general-runtime.voiceflow.com',
+              versionID: 'production',
+              voice: { url: "https://runtime-api.voiceflow.com" }
+            });
+          }
+          v.src = "https://cdn.voiceflow.com/widget-next/bundle.mjs"; v.type = "text/javascript"; s.parentNode.insertBefore(v, s);
+      })(document, 'script');
+    </script>
+</body>
+</html>
